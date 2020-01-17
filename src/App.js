@@ -14,7 +14,12 @@ function App() {
       <main>
         <Calculator />
       </main>
-
+      <footer>
+        <p>By: <a href="https://alilynne.com">AliLynne</a></p>
+        <p>
+          <a href="https://github.com/AliLynne/scribbleCalc">Source code</a>
+        </p>
+      </footer>
     </div>
   )
 }
