@@ -1,0 +1,76 @@
+$color-primary: rgb(240, 196, 230);
+$color-primary-shadow: rgb(206, 118, 188);
+$color-secondary: rgb(199, 67, 87);
+$color-secondary-shadow: rgb(253, 101, 124);
+$color-grey-dark: rgb(222, 206, 209);
+$color-grey-light: rgb(245, 240, 241);
+$color-accent: rgb(83, 62, 24);
+
+
+.calc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 7px $color-accent;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  width: 35rem;
+
+  
+  &__display {
+    color: $color-accent;
+    font-size: 3rem;
+    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+    border: solid 7px $color-accent;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    text-align: right;
+    margin: 3rem 2rem 1rem 2rem;
+    width: 80%;
+  }
+
+  &__keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    margin: 1rem 2rem 2rem 2rem;
+  }
+
+  &__functions {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    button {
+      background-color: $color-primary;
+      &:hover,
+      &:focus {
+        background-color: $color-primary-shadow;
+      }
+    }
+  }
+  
+  &__operators {
+    grid-column: 4;
+    grid-row: 1 / span 5;
+
+    button {
+      background-color: $color-secondary;
+      &:hover,
+      &:focus {
+        background-color: $color-secondary-shadow;
+      }
+    }
+  }
+
+  &__numbers {
+    grid-column: 1 / span 3;
+    grid-row: 2 / span 4;
+    button {
+      background-color: $color-grey-dark;
+
+      &:hover,
+      &:focus {
+        background-color: $color-grey-light;
+      }
+    }
+  }
+
+  
+}
