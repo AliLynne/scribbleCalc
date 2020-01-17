@@ -1,33 +1,98 @@
 import React, { useReducer } from 'react'
 
+import Button from './Button'
+
 import './calculator.scss'
 
 const keys = {
-  nums: [
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-  ],
   funcs: [
-    '+', '-', '*', '/', '=', 'C'
+    {
+      value: 'C',
+      id: 'clear'
+    },
+    {
+      value: '±',
+      id: 'neg'
+    },
+    {
+      value: '%',
+      id: 'mod'
+    }
+  ],
+  nums: [
+    {
+      value: 7,
+      id: '7'
+    },
+    {
+      value: 8,
+      id: '8'
+    },
+    {
+      value: 9,
+      id: '9'
+    },
+    {
+      value: 4,
+      id: '4'
+    },
+    {
+      value: 5,
+      id: '5'
+    },
+    {
+      value: 6,
+      id: '6'
+    },
+    {
+      value: 1,
+      id: '1'
+    },
+    {
+      value: 2,
+      id: '2'
+    },
+    {
+      value: 3,
+      id: '3'
+    },
+    {
+      value: 0,
+      id: 'zero'
+    },
+    {
+      value: '.',
+      id: 'decimal'
+    }
+  ],
+  ops: [
+    {
+      value: '/',
+      id: 'divide'
+    },
+    {
+      value: 'x',
+      id: 'multiply'
+    },
+    {
+      value: '-',
+      id: 'subtract'
+    },
+    {
+      value: '+',
+      id: 'add'
+    },
+    {
+      value: '=',
+      id: 'equals'
+    }
   ]
 }
 
-
-
 const reducer = (state, action) => {
-  // switch (true) {
-  //   case !isNan(action.type):
-  //     if (state.display !== '0') {
-  //       return { ...state, display: `${state.display}${action.type}` }
-  //     } else if (state.display === '0') {
-  //       return { ...state, display: `${action.type}` }
-  //     } else {
-  //       return { ...state }
-  //     }      
-  // }
-
-
   switch (action.type) {
-    case '0':
+    case 'zero':
+      return { ...state, editText: '0' }
     case '1':
     case '2':
     case '3':
@@ -37,63 +102,50 @@ const reducer = (state, action) => {
     case '7':
     case '8':
     case '9':
-      if (!state.queuedOp) {
-        if (state.editText !== '0') {
-          return { ...state, editText: `${state.editText}${action.type}` }
-        } else {
-          return { ...state, editText: `${action.type}` }
-        }
+      if (state.editText === '0') {
+        return { ...state, editText: action.type }
       } else {
-        return { ...state, editText: `${action.type}` }
+        return { ...state, editText: `${state.editText}${action.type}` }
       }
-
-    case '+':
-      if (!state.queuedOp) {
-        return { ...state, valueOne: state.editText, queuedOp: '+' }
-      } else {
-        console.log('need to run calc here')
-        return { ...state }
-      }
-
-    case '-':
-    case '*':
-    case '/':
-    case '=':
-    case 'C':
-      return { initialState }
     default:
-      throw new Error('You have confused your reducer!')
+      console.log(action.type)
+      return { ...state }
   }
 }
 
 const initialState = {
-  editText: '0',
-  valueOne: '',
-  valueTwo: '',
-  queuedOp: undefined
+  editText: '0'
 }
 
-const Calculator = () => {
+const CalcLayout = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  const handleClick = (e) => {
+    dispatch({ type: e.target.id })
+  }
 
   return (
     <div className="calc">
-
-      <p>{state.editText}</p>
-      <ul>
-        {keys.nums.map(key => {
-          return <li key={key}><button onClick={() => { dispatch({ type: key }) }}>{key}</button></li>
-        })}
-      </ul>
-
-      <ul>
-        {keys.funcs.map(func => {
-          return <li key={func}><button onClick={() => { dispatch({ type: func }) }}>{func}</button></li>
-        })}
-      </ul>
-
+      <p className="calc__display">{state.editText}</p>
+      <div className="calc__keypad">
+        <div className="calc__functions">
+          {keys.funcs.map(key => {
+            return <Button value={key.value} id={key.id} key={key.id} handleClick={handleClick} />
+          })}
+        </div>
+        <div className="calc__operators">
+          {keys.ops.map(key => {
+            return <Button value={key.value} id={key.id} key={key.id} handleClick={handleClick} />
+          })}
+        </div>
+        <div className="calc__numbers">
+          {keys.nums.map(key => {
+            return <Button value={key.value} id={key.id} key={key.id} handleClick={handleClick} />
+          })}
+        </div>
+      </div>
     </div>
   )
 }
 
-export default Calculator
+export default CalcLayout

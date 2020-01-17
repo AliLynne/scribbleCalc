@@ -1,6 +1,6 @@
 import React from 'react'
-// import Calculator from './Calculator/Calculator'
-import CalcLayout from './Calculator/CalcLayout'
+import Calculator from './Calculator/Calculator'
+
 import './App.scss'
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
         <h1>Calculator</h1>
       </header>
 
-      {/* <Calculator /> */}
+
       <main>
-        <CalcLayout />
+        <Calculator />
       </main>
 
     </div>
