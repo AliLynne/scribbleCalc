@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Calculator</h1>
+        <h1>Scribble Calculator</h1>
       </header>
 
 
@@ -15,7 +15,7 @@ function App() {
         <Calculator />
       </main>
       <footer>
-        <p>By: <a href="https://alilynne.com">AliLynne</a></p>
+        <p>By: <a href="https://www.alilynne.com">AliLynne</a></p>
         <p>
           <a href="https://github.com/AliLynne/scribbleCalc">Source code</a>
         </p>
