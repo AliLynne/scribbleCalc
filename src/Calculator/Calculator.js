@@ -16,7 +16,7 @@ const keys = {
     },
     {
       value: '%',
-      id: 'mod'
+      id: 'percent'
     }
   ],
   nums: [
@@ -126,6 +126,9 @@ const reducer = (state, action) => {
       } else {
         return { ...state, editText: `-${state.editText}` }
       }
+    case 'percent':
+      const per = parseFloat(state.editText) * .01
+      return { ...state, editText: per.toString() }
     default:
       console.log(action.type)
       return { ...state }
