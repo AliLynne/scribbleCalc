@@ -107,6 +107,12 @@ const reducer = (state, action) => {
       } else {
         return { ...state, editText: `${state.editText}${action.type}` }
       }
+    case 'decimal':
+      if (state.editText.includes('.')) {
+        return { ...state }
+      } else {
+        return { ...state, editText: `${state.editText}.` }
+      }
     default:
       console.log(action.type)
       return { ...state }
