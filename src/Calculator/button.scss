@@ -7,18 +7,20 @@ $color-grey-light: rgb(245, 240, 241);
 $color-accent: rgb(83, 62, 24);
 
 button {
-    color: $color-accent;
-    font-size: 2.5rem;
-    height: 6rem;
-    width: 6rem;
-    margin: .2rem;
-    outline: none;
-    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
-    border: solid 7px $color-accent;
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    transition:all .5s ease;
-    &:hover,
-    &:focus  {
-      box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.6);
-    } 
-  }
+  font-family: 'Amatic SC', cursive;
+  font-weight: 700;
+  color: $color-accent;
+  font-size: 4rem;
+  height: 6rem;
+  width: 6rem;
+  margin: .2rem;
+  outline: none;
+  box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+  border: solid 7px $color-accent;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  transition:all .5s ease;
+  &:hover,
+  &:focus  {
+    box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.6);
+  } 
+}
