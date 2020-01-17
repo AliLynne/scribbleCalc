@@ -117,6 +117,15 @@ const reducer = (state, action) => {
       } else {
         return { ...state, editText: `${state.editText}.` }
       }
+    case 'clear':
+      return { ...initialState }
+    case 'neg':
+      if (state.editText.includes('-')) {
+        const newText = state.editText.slice(1)
+        return { ...state, editText: newText }
+      } else {
+        return { ...state, editText: `-${state.editText}` }
+      }
     default:
       console.log(action.type)
       return { ...state }
