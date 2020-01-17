@@ -92,7 +92,11 @@ const keys = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'zero':
-      return { ...state, editText: '0' }
+      if (state.editText === '0') {
+        return { ...state, editText: '0' }
+      } else {
+        return { ...state, editText: `${state.editText}0` }
+      }
     case '1':
     case '2':
     case '3':
