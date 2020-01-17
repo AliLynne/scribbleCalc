@@ -88,8 +88,26 @@ const keys = {
     }
   ]
 }
+const calculate = (valueOne, operator, valueTwo) => {
+  //return parseFloat(valueOne) operator parseFloat(valueTwo)
+  switch (operator) {
+    case '+':
+      return (parseFloat(valueOne) + parseFloat(valueTwo)).toString()
+    case '-':
+      return (parseFloat(valueOne) - parseFloat(valueTwo)).toString()
+    case '/':
+      return (parseFloat(valueOne) / parseFloat(valueTwo)).toString()
+    case '*':
+      return (parseFloat(valueOne) * parseFloat(valueTwo)).toString()
+    default:
+      return new Error('Invalid operater.')
+  }
+}
+
 
 const reducer = (state, action) => {
+
+
   switch (action.type) {
     case 'zero':
       if (state.editText === '0') {
@@ -106,7 +124,7 @@ const reducer = (state, action) => {
     case '7':
     case '8':
     case '9':
-      if (state.editText === '0') {
+      if (state.editText === '0' || state.valueOne) {
         return { ...state, editText: action.type }
       } else {
         return { ...state, editText: `${state.editText}${action.type}` }
@@ -129,6 +147,41 @@ const reducer = (state, action) => {
     case 'percent':
       const per = parseFloat(state.editText) * .01
       return { ...state, editText: per.toString() }
+    case 'add':
+      if (state.savedOp) {
+        const calced = calculate(state.valueOne, state.savedOp, state.editText)
+        return { ...state, valueOne: calced, savedOp: '+', editText: calced }
+      } else {
+        return { ...state, valueOne: state.editText, savedOp: '+' }
+      }
+    case 'subtract':
+      if (state.savedOp) {
+        const calced = calculate(state.valueOne, state.savedOp, state.editText)
+        return { ...state, valueOne: calced, savedOp: '-', editText: calced }
+      } else {
+        return { ...state, valueOne: state.editText, savedOp: '-' }
+      }
+    case 'multiply':
+      if (state.savedOp) {
+        const calced = calculate(state.valueOne, state.savedOp, state.editText)
+        return { ...state, valueOne: calced, savedOp: '*', editText: calced }
+      } else {
+        return { ...state, valueOne: state.editText, savedOp: '*' }
+      }
+    case 'divide':
+      if (state.savedOp) {
+        const calced = calculate(state.valueOne, state.savedOp, state.editText)
+        return { ...state, valueOne: calced, savedOp: '/', editText: calced }
+      } else {
+        return { ...state, valueOne: state.editText, savedOp: '/' }
+      }
+    case 'equals':
+      if (state.savedOp) {
+        const calced = calculate(state.valueOne, state.savedOp, state.editText)
+        return { ...state, valueOne: calced, savedOp: null, editText: calced }
+      } else {
+        return { ...state, valueOne: state.editText, savedOp: null }
+      }
     default:
       console.log(action.type)
       return { ...state }
