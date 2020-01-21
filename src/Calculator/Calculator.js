@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react'
+import { useSpring, animated } from 'react-spring'
 
 import Button from './Button'
 
@@ -104,7 +105,6 @@ const calculate = (valueOne, operator, valueTwo) => {
   }
 }
 
-
 const reducer = (state, action) => {
 
 
@@ -192,15 +192,31 @@ const initialState = {
   editText: '0'
 }
 
+const config = {
+  mass: 6,
+  tension: 170,
+  friction: 26,
+  precision: 0.01,
+  velocity: 0,
+}
+
+
 const CalcLayout = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const { x } = useSpring({
+    config,
+    x: 0,
+    from: {x: -100 },
+  })
 
   const handleClick = (e) => {
     dispatch({ type: e.target.id })
   }
 
   return (
-    <div className="calc">
+    <animated.div style={{
+      transform: x.interpolate(x => `translateY(${x}vh)`)
+    }} className="calc">
       <p className="calc__display">{state.editText}</p>
       <div className="calc__keypad">
         <div className="calc__functions">
@@ -219,7 +235,7 @@ const CalcLayout = () => {
           })}
         </div>
       </div>
-    </div>
+    </animated.div>
   )
 }
 
