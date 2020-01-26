@@ -6,11 +6,11 @@ $color-grey-dark: rgb(222, 206, 209);
 $color-grey-light: rgb(245, 240, 241);
 $color-accent: rgb(83, 62, 24);
 
-@media (prefers-reduced-motion: reduce) {
-  .calc {
-    animation: none;
-  }
-}
+// @media (prefers-reduced-motion: reduce) {
+//   .calc {
+//     animation: none;
+//   }
+// }
 
 .calc {
   display: flex;
