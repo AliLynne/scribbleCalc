@@ -6,11 +6,11 @@ $color-grey-dark: rgb(222, 206, 209);
 $color-grey-light: rgb(245, 240, 241);
 $color-accent: rgb(83, 62, 24);
 
-// @media (prefers-reduced-motion: reduce) {
-//   .calc {
-//     animation: none;
-//   }
-// }
+@media (prefers-reduced-motion: reduce) {
+  .calc {
+    animation: none;
+  }
+}
 
 .calc {
   display: flex;
@@ -43,6 +43,7 @@ $color-accent: rgb(83, 62, 24);
   }
 
   &__functions {
+    display: flex;
     grid-column: 1 / span 3;
     grid-row: 1;
     button {
@@ -68,6 +69,8 @@ $color-accent: rgb(83, 62, 24);
   }
 
   &__numbers {
+    display: flex;
+    flex-wrap: wrap;
     grid-column: 1 / span 3;
     grid-row: 2 / span 4;
     button {

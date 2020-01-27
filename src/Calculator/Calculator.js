@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { useSpring, animated } from 'react-spring'
+import { useSpring, useTrail, animated } from 'react-spring'
 
 import Button from './Button'
 
@@ -200,6 +200,9 @@ const config = {
   velocity: 0,
 }
 
+const funcsConfig = { mass: 15, tension: 2000, friction: 200 }
+const opsConfig = { mass: 15, tension: 2000, friction: 200 }
+const numsConfig = { mass: 15, tension: 2000, friction: 200 }
 
 const CalcLayout = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -208,6 +211,9 @@ const CalcLayout = () => {
     x: 0,
     from: {x: -100 },
   })
+  const funcsTrail = useTrail(keys.funcs.length, { config: funcsConfig, y: 0, from: { y: 1000 }, delay: 1000 })
+  const opsTrail = useTrail(keys.ops.length, { config: opsConfig, y: 0, from: { y: -1000}, delay: 1800 })
+  const numsTrail = useTrail(keys.nums.length, { config: numsConfig, x: 0, from: { x: 1000 }, delay: 2600 })
 
   const handleClick = (e) => {
     dispatch({ type: e.target.id })
@@ -220,19 +226,34 @@ const CalcLayout = () => {
       <p className="calc__display">{state.editText}</p>
       <div className="calc__keypad">
         <div className="calc__functions">
-          {keys.funcs.map(key => {
-            return <Button value={key.value} id={key.id} key={key.id} handleClick={handleClick} />
-          })}
+          {funcsTrail.map(({ y }, index) => (
+            <animated.div
+              key={keys.funcs[index].id}
+              style={{ y }}
+            >
+              <Button value={keys.funcs[index].value} id={keys.funcs[index].id} key={keys.funcs[index].id} handleClick={handleClick} />
+            </animated.div>
+          ))}
         </div>
         <div className="calc__operators">
-          {keys.ops.map(key => {
-            return <Button value={key.value} id={key.id} key={key.id} handleClick={handleClick} />
-          })}
+          {opsTrail.map(({ y }, index) => (
+            <animated.div
+              key={keys.ops[index].id}
+              style={{ y }}
+            >
+              <Button value={keys.ops[index].value} id={keys.ops[index].id} key={keys.ops[index].id} handleClick={handleClick} />
+            </animated.div>
+          ))}
         </div>
         <div className="calc__numbers">
-          {keys.nums.map(key => {
-            return <Button value={key.value} id={key.id} key={key.id} handleClick={handleClick} />
-          })}
+          {numsTrail.map(({ x }, index) => (
+            <animated.div
+              key={keys.nums[index].id}
+              style={{ x }}
+            >
+              <Button value={keys.nums[index].value} id={keys.nums[index].id} key={keys.nums[index].id} handleClick={handleClick} />
+            </animated.div>
+          ))}
         </div>
       </div>
     </animated.div>
